@@ -1,0 +1,8 @@
+.todo-list{
+    padding: 7rem 0;
+    height: 93vh;
+}
+form{
+    display: flex;
+    justify-content: center;
+}

@@ -1,23 +1,38 @@
-import logo from './logo.svg';
+import Header from './components/Header'
+import { useState } from 'react';
+
+import TodoList from './components/TodoList'
+
+import pdata from './data'
 import './App.css';
 
 function App() {
+
+  const TIME_HOURS = new Date().getHours()
+  
+  const [ data, setData ] = useState(pdata)
+  const [ newTodo, setNewTodo ] = useState("")
+
+  function handleSubmit(e){
+    e.preventDefault()
+
+    if(newTodo != ""){
+      setData([...data, {
+        id: data.length,
+        title: newTodo
+      }])
+    }
+
+  }
+
+  function handleChange(e){
+    setNewTodo(e.target.value)
+  }
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="app">
+      <Header />
+      <TodoList data={data} handleSubmit={handleSubmit} handleChange={handleChange}/>
     </div>
   );
 }
